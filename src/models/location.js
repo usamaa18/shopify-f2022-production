@@ -16,7 +16,7 @@ const pointSchema = new Schema({
 const schema = new Schema({
   name: {
     type: String,
-    required: [true],
+    required: true,
   },
   location: {
     type: pointSchema,

@@ -3,21 +3,25 @@ const Schema = mongoose.Schema;
 const ObjectId = Schema.Types.ObjectId;
 
 const schema = new Schema({
+  name: {
+    type: String,
+    required: true,
+  },
   weight: {
     type: Number,
-    required: [true],
+    required: true,
   },
   length: {
     type: Number,
-    required: [true],
+    required: true,
   },
   width: {
     type: Number,
-    required: [true],
+    required: true,
   },
   height: {
     type: Number,
-    required: [true],
+    required: true,
   },
   locationId: {
     type: ObjectId,
