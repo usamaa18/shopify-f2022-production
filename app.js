@@ -32,15 +32,15 @@ app.use('/v1/items', itemsRouter);
 mongoose.connect(process.env.MONGODB_URI, {useNewUrlParser: true, useUnifiedTopology: true});
 
 
-// const Warehouse = require('./src/models/warehouse');
-// const Item = require('./src/models/item');
-// const denver = { type: 'Point', coordinates: [-104.9903, 39.7392] };
-// Warehouse.create({ name: 'Denver', location: denver }, (err, doc) => {
-//   if (err) {console.log({error: err});}
-//   else {
-//     console.log(doc);
-//   }
-// });
+const Warehouse = require('./src/models/warehouse');
+const Item = require('./src/models/item');
+const denver = { type: 'Point', coordinates: [-104.9903, 39.7392] };
+Warehouse.create({ name: 'Denver', location: denver }, (err, doc) => {
+  if (err) {console.log({error: err});}
+  else {
+    console.log(doc);
+  }
+});
 
 
 
