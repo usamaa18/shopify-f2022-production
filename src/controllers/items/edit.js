@@ -2,18 +2,21 @@ const mongoose = require('mongoose');
 const Item = require("../../models/item");
 
 const editItem = async (req, res) => {
+    // check id formatting
     if (!req.params.itemId.match(/^[0-9a-fA-F]{24}$/)) {
         res.status(400).send("Invalid itemId format, must follow MongoDB ObjectId requirements");
         return;
     }
+    // if warehouseId is included in req.body, check that it is not empty
     if ("warehouseId" in req.body && req.body.warehouseId !== "") {
+        // check id formatting
         if (!req.body.warehouseId.match(/^[0-9a-fA-F]{24}$/)) {
             res.status(400).send("Invalid warehouseId format, must follow MongoDB ObjectId requirements");
             return;
         }
         else {
             warehouseId = mongoose.Types.ObjectId(req.body.warehouseId);
-        }       
+        }
     }
 
 
@@ -45,7 +48,7 @@ const editItem = async (req, res) => {
         },
         (err, doc) => {
             if (err) { res.status(400).send({ error: err }); }
-            else if (doc == null) {res.status(404).send("Invalid item (itemId not found in DB)");}
+            else if (doc == null) { res.status(404).send("Invalid item (itemId not found in DB)"); }
             else {
                 res.send(doc);
             }

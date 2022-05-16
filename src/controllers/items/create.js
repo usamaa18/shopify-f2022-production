@@ -2,15 +2,20 @@ const mongoose = require('mongoose');
 const Item = require("../../models/item");
 
 const createItem = async (req, res) => {
+
+  // check that all the required item properties are passed via req.body
   const reqProps = ["description", "weight", "length", "width", "height", "warehouseId"];
   if (reqProps.some(x => !(x in req.body))) {
     res.status(400).send("Incomplete form");
     return;
   }
+
+  // check id formatting
   if (!req.body.warehouseId.match(/^[0-9a-fA-F]{24}$/)) {
     res.status(400).send("Invalid warehouseId format, must follow MongoDB ObjectId requirements");
     return;
   }
+
   const obj = {
     desc: req.body.description,
     weight: new Number(req.body.weight),

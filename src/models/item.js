@@ -36,13 +36,9 @@ const schema = new Schema({
   },
 });
 
-schema.plugin(idValidator, {
-  /* Custom validation message with {PATH} being replaced 
-  * with the relevant schema path that contains an invalid 
-  * document ID.
-  */
-  message : 'Invalid warehouse (warehouseId not found in DB)',
-});
+
+// custom validation to ensure the warehouseId actually links to a warehouse in the DB
+schema.plugin(idValidator, { message: 'Invalid warehouse (warehouseId not found in DB)' });
 
 const Item = mongoose.model('Item', schema);
 

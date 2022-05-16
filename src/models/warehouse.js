@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+function numCoords(val) {
+  return val.length == 2;
+}
+
 const pointSchema = new Schema({
   type: {
     type: String,
@@ -9,7 +13,8 @@ const pointSchema = new Schema({
   },
   coordinates: {
     type: [Number],
-    required: true
+    required: [true, "Coordinates are required"],
+    validate: [numCoords, "Exactly two coordinates are required"]
   }
 }, {
   _id: false
