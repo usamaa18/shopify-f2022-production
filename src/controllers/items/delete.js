@@ -16,7 +16,8 @@ const deleteItem = async (req, res) => {
             if (err) { res.status(400).send({ error: err }); }
             else if (doc == null) {res.status(400).send("Invalid item (itemId not found in DB)");} 
             else {
-                res.send(doc);
+                res.send("Deleted item successfully");
+                // alternatively can do res.send(doc);
             }
         }
     );

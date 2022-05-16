@@ -17,7 +17,8 @@
           $.ajax({
             url: template(document.getElementById('deleteItemId').value),
             type: 'DELETE',
-            success: function(result) {
+            complete: function(result) { 
+              alert(result.responseText);
             }
           });
         });
@@ -26,6 +27,30 @@
     </script>
   </head>
   <body>
+    <h3>Welcome, I'm glad you're here. To save you time, I've already added some sample items and warehouses for testing.</h3>
+    <form action="/v1/items" method="GET">
+    <input value="List Items" type="submit"/>
+    </form>
+    <h3>Sample warehouses:</h3>
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Warehouse ID</th>
+      </tr>
+      <tr>
+        <td>Toronto</td>
+        <td>6281d0293d222c6c47382464</td>
+      </tr>
+      <tr>
+        <td>Edmonton</td>
+        <td>6281cff83d222c6c47382462</td>
+      </tr>
+      <tr>
+        <td>Vancouver</td>
+        <td>6281d0513d222c6c47382466</td>
+      </tr>
+    </table> 
+
     <h3>Create Item</h3>
     <form action="/v1/items" method="POST">
       <p>
@@ -34,17 +59,13 @@
         Length (cm): <input name="length" value="" type="text" required="required"/>
         Width (cm): <input name="width" value="" type="text" required="required"/>
         Height (cm): <input name="height" value="" type="text" required="required"/>
-        Warehouse:
+        Warehouse ID: <input name="warehouseId" value="" type="text" required="required"/>
 
-        <select name="warehouseId" autocomplete="off" required>
-          <option hidden disabled selected> -- select -- </option>
-          <option value="6281d0293d222c6c47382464">Toronto</option>
-          <option value="6281cff83d222c6c47382462">Edmonton</option>
-          <option value="6281d0513d222c6c47382466">Vancouver</option>
-        </select>
       </p>
       <input value="Submit" type="submit"/>
     </form>
+
+
 
     <h3>Edit Item</h3>
     <form id="editForm" action="" method="POST">
@@ -55,14 +76,8 @@
         Length (cm): <input name="length" value="" type="text" placeholder="unchanged"/>
         Width (cm): <input name="width" value="" type="text" placeholder="unchanged"/>
         Height (cm): <input name="height" value="" type="text" placeholder="unchanged"/>
-        Warehouse:
+        Warehouse ID: <input name="warehouseId" value="" type="text" placeholder="unchanged"/>
 
-        <select autocomplete="off">
-          <option hidden disabled selected> -- unchanged -- </option>
-          <option value="6281d0293d222c6c47382464">Toronto</option>
-          <option value="6281cff83d222c6c47382462">Edmonton</option>
-          <option value="6281d0513d222c6c47382466">Vancouver</option>
-        </select>
       </p>
       <input value="Submit" type="submit"/>
     </form>
@@ -75,10 +90,7 @@
     <input value="Submit" type="submit"/>
     </form>
 
-    <h3>List Items</h3>
-    <form action="/v1/items" method="GET">
-    <input value="Submit" type="submit"/>
-    </form>
+
 
     <h3>Create Warehouse</h3>
     <form action="/v1/warehouses" method="POST">
