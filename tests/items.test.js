@@ -3,8 +3,6 @@ const chaiHttp = require('chai-http')
 const app = require("../app")
 const Warehouse = require("../src/models/warehouse")
 const Item = require("../src/models/item")
-const req = require('express/lib/request')
-const expect = chai.expect
 chai.use(chaiHttp)
 chai.should()
 var testWarehouseId;
