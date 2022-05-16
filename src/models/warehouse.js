@@ -17,6 +17,7 @@ const schema = new Schema({
   name: {
     type: String,
     required: true,
+    minLength: 1
   },
   location: {
     type: pointSchema,
@@ -26,4 +27,4 @@ const schema = new Schema({
 
 const Warehouse = mongoose.model('Warehouse', schema);
 
-module.exports = { Warehouse };
+module.exports = Warehouse;

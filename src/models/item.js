@@ -1,34 +1,49 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const ObjectId = Schema.Types.ObjectId;
+var idValidator = require('mongoose-id-validator');
 
 const schema = new Schema({
-  name: {
+  desc: {
     type: String,
-    required: true,
+    required: [true, "Description is required"],
+    minLength: [1, "Description is required"]
   },
   weight: {
     type: Number,
-    required: true,
+    required: [true, "Weight is required"],
+    min: [0, "Cannot have negative weight"]
   },
   length: {
     type: Number,
-    required: true,
+    required: [true, "Length is required"],
+    min: [0, "Cannot have negative length"]
   },
   width: {
     type: Number,
-    required: true,
+    required: [true, "Width is required"],
+    min: [0, "Cannot have negative width"]
   },
   height: {
     type: Number,
-    required: true,
+    required: [true, "Height is required"],
+    min: [0, "Cannot have negative height"]
   },
-  locationId: {
+  warehouseId: {
     type: ObjectId,
-    ref: 'Location',
+    required: [true, "Warehouse is required"],
+    ref: 'Warehouse',
   },
+});
+
+schema.plugin(idValidator, {
+  /* Custom validation message with {PATH} being replaced 
+  * with the relevant schema path that contains an invalid 
+  * document ID.
+  */
+  message : 'Invalid warehouse (warehouseId not found in DB)',
 });
 
 const Item = mongoose.model('Item', schema);
 
-module.exports = { Item };
+module.exports = Item;
