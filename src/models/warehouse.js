@@ -11,6 +11,8 @@ const pointSchema = new Schema({
     type: [Number],
     required: true
   }
+}, {
+  _id: false
 });
 
 const schema = new Schema({

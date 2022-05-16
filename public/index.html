@@ -1,0 +1,94 @@
+<html>
+  <head>
+    <link rel="shortcut icon" href="#">
+    <link rel="stylesheet" href="./stylesheets/style.css">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript">
+      window.onload = function() {
+        console.log("Hello world!");
+        const template = (itemId) => `/v1/items/${itemId}`;
+        document.getElementById('editForm').addEventListener('submit', function(s) {
+          s.preventDefault();
+          this.action = template(document.getElementById('editItemId').value);
+          this.submit();
+        });
+        document.getElementById('deleteForm').addEventListener('submit', function(s) {
+          s.preventDefault();
+          $.ajax({
+            url: template(document.getElementById('deleteItemId').value),
+            type: 'DELETE',
+            success: function(result) {
+            }
+          });
+        });
+
+      }
+    </script>
+  </head>
+  <body>
+    <h3>Create Item</h3>
+    <form action="/v1/items" method="POST">
+      <p>
+        Description: <input name="description" value="" type="text" required="required"/>
+        Weight (kg): <input name="weight" value="" type="text" required="required"/>
+        Length (cm): <input name="length" value="" type="text" required="required"/>
+        Width (cm): <input name="width" value="" type="text" required="required"/>
+        Height (cm): <input name="height" value="" type="text" required="required"/>
+        Warehouse:
+
+        <select name="warehouseId" autocomplete="off" required>
+          <option hidden disabled selected> -- select -- </option>
+          <option value="6281d0293d222c6c47382464">Toronto</option>
+          <option value="6281cff83d222c6c47382462">Edmonton</option>
+          <option value="6281d0513d222c6c47382466">Vancouver</option>
+        </select>
+      </p>
+      <input value="Submit" type="submit"/>
+    </form>
+
+    <h3>Edit Item</h3>
+    <form id="editForm" action="" method="POST">
+      <p>
+        Item ID: <input id="editItemId" value="" type="text" required/>
+        Description: <input name="description" value="" type="text" placeholder="unchanged"/>
+        Weight (kg): <input name="weight" value="" type="text" placeholder="unchanged" />
+        Length (cm): <input name="length" value="" type="text" placeholder="unchanged"/>
+        Width (cm): <input name="width" value="" type="text" placeholder="unchanged"/>
+        Height (cm): <input name="height" value="" type="text" placeholder="unchanged"/>
+        Warehouse:
+
+        <select autocomplete="off">
+          <option hidden disabled selected> -- unchanged -- </option>
+          <option value="6281d0293d222c6c47382464">Toronto</option>
+          <option value="6281cff83d222c6c47382462">Edmonton</option>
+          <option value="6281d0513d222c6c47382466">Vancouver</option>
+        </select>
+      </p>
+      <input value="Submit" type="submit"/>
+    </form>
+
+    <h3>Delete Item</h3>
+    <form id="deleteForm" action="">
+      <p>
+        Item ID: <input id="deleteItemId" value="" type="text" required/>
+      </p>
+    <input value="Submit" type="submit"/>
+    </form>
+
+    <h3>List Items</h3>
+    <form action="/v1/items" method="GET">
+    <input value="Submit" type="submit"/>
+    </form>
+
+    <h3>Create Warehouse</h3>
+    <form action="/v1/warehouses" method="POST">
+      <p>
+        Name: <input name="name" value="" type="text" required="required"/>
+        Latitude: <input name="latitude" value="" type="text" required="required"/>
+        Longitude: <input name="longitude" value="" type="text" required="required"/>
+      </p>
+      <input value="Submit" type="submit"/>
+    </form>
+
+  </body>
+</html> 
