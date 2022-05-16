@@ -17,7 +17,7 @@ const schema = new Schema({
   name: {
     type: String,
     required: true,
-    minLength: 1
+    minLength: [1, "Name is required"]
   },
   location: {
     type: pointSchema,

@@ -10,6 +10,7 @@ require('dotenv').config();
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var itemsRouter = require('./routes/items');
+var warehousesRouter = require('./routes/warehouses');
 
 var app = express();
 
@@ -28,21 +29,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/v1/items', itemsRouter);
+app.use('/v1/warehouses', warehousesRouter);
 
 mongoose.connect(process.env.MONGODB_URI, {useNewUrlParser: true, useUnifiedTopology: true});
-
-
-const Warehouse = require('./src/models/warehouse');
-const Item = require('./src/models/item');
-const denver = { type: 'Point', coordinates: [-104.9903, 39.7392] };
-Warehouse.create({ name: 'Denver', location: denver }, (err, doc) => {
-  if (err) {console.log({error: err});}
-  else {
-    console.log(doc);
-  }
-});
-
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
