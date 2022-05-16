@@ -9,7 +9,7 @@ const listItems = async (req, res) => {
         {},
         (err, doc) => {
             if (err) { res.status(400).send({ error: err }); }
-            else if (doc == null) {res.status(400).send("No items to show");} 
+            else if (doc == null) {res.status(404).send("No items to show");} 
             else {
                 res.send(doc);
             }
