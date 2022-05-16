@@ -14,7 +14,7 @@ const warehousesRouter = require('./routes/warehouses');
 const app = express();
 
 app.use(cors());
-app.use(logger('dev'));
+// app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -25,7 +25,14 @@ app.use('/v1/items', itemsRouter);
 app.use('/v1/warehouses', warehousesRouter);
 
 // connect to database
-mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+(async () => {
+  try {
+    await mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+  } catch (err) {
+    console.log('Connection failed', err);
+  }
+})()
+    
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
