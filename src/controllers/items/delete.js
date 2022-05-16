@@ -7,7 +7,7 @@ const deleteItem = async (req, res) => {
         return;
     }
 
-    let searchObj = { _id: mongoose.Types.ObjectId(req.params.itemId) };
+    const searchObj = { _id: mongoose.Types.ObjectId(req.params.itemId) };
 
     Item.findOneAndDelete(
         searchObj,

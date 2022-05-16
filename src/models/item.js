@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const ObjectId = Schema.Types.ObjectId;
-var idValidator = require('mongoose-id-validator');
+const idValidator = require('mongoose-id-validator');
 
 const schema = new Schema({
   desc: {

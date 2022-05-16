@@ -3,7 +3,7 @@ const Item = require("../../models/item");
 
 const listItems = async (req, res) => {
 
-    let searchObj = { _id: mongoose.Types.ObjectId(req.query.itemId) };
+    const searchObj = { _id: mongoose.Types.ObjectId(req.query.itemId) };
 
     Item.find(
         {},

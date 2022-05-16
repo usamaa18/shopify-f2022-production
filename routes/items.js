@@ -1,18 +1,18 @@
-var express = require('express');
-var router = express.Router();
-const { create } = require('../src/controllers/items/create');
-const { edit } = require('../src/controllers/items/edit');
+const express = require('express');
+const router = express.Router();
+const { createItem } = require('../src/controllers/items/create');
+const { editItem } = require('../src/controllers/items/edit');
 const { deleteItem } = require('../src/controllers/items/delete');
 const { listItems } = require('../src/controllers/items/list');
 
 router.post('/', (req, res) => {
   console.log("creating");
-  create(req, res);
+  createItem(req, res);
 });
 
 router.post('/:itemId', (req, res) => {
   console.log("editing");
-  edit(req, res);
+  editItem(req, res);
 });
 
 

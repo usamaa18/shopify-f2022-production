@@ -10,7 +10,7 @@ const createWarehouse = async (req, res) => {
     return;
   }
 
-  let obj = {
+  const obj = {
     name: req.body.name,
     location: { 
         type: 'Point', 
