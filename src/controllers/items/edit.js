@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Item = require("../../models/item");
 
 const edit = async (req, res) => {
-    if (!req.query.itemId.match(/^[0-9a-fA-F]{24}$/)) {
+    if (!req.params.itemId.match(/^[0-9a-fA-F]{24}$/)) {
         res.status(400).send("Invalid itemId format, must follow MongoDB ObjectId requirements");
         return;
     }
@@ -17,7 +17,7 @@ const edit = async (req, res) => {
     }
 
 
-    let searchObj = { _id: mongoose.Types.ObjectId(req.query.itemId) };
+    let searchObj = { _id: mongoose.Types.ObjectId(req.params.itemId) };
 
 
     // conditionally add member to object, since we only need to update certain fields and not repalce the whole doc
