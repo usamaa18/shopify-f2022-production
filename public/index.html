@@ -1,105 +1,45 @@
 <html>
-  <head>
-    <link rel="shortcut icon" href="#">
-    <link rel="stylesheet" href="./stylesheets/style.css">
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript">
-      window.onload = function() {
-        const template = (itemId) => `/v1/items/${itemId}`;
-        document.getElementById('editForm').addEventListener('submit', function(s) {
-          s.preventDefault();
-          this.action = template(document.getElementById('editItemId').value);
-          this.submit();
-        });
-        document.getElementById('deleteForm').addEventListener('submit', function(s) {
-          s.preventDefault();
-          $.ajax({
-            url: template(document.getElementById('deleteItemId').value),
-            type: 'DELETE',
-            complete: function(result) { 
-              alert(result.responseText);
-            }
-          });
-        });
 
-      }
-    </script>
-  </head>
-  <body>
-    <h3>Welcome, I'm glad you're here. To save you time, I've already added some sample warehouses for testing. There are no items currently.</h3>
+<head>
+  <link rel="shortcut icon" href="#">
+  <link rel="stylesheet" href="./stylesheets/style.css">
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <!-- CSS only -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+  <script src="index.js"></script>
+</head>
+
+<body>
+  <div class="container">
+
     <form action="/v1/items" method="GET">
-    <input value="List Items" type="submit"/>
+      <input value="List Items" type="submit" />
     </form>
-    <h3>Sample warehouses:</h3>
-    <table>
-      <tr>
-        <th>Name</th>
-        <th>Warehouse ID</th>
-      </tr>
-      <tr>
-        <td>Toronto</td>
-        <td>6282b9c9caa5267d89c82134</td>
-      </tr>
-      <tr>
-        <td>Edmonton</td>
-        <td>6282b9c8caa5267d89c82130</td>
-      </tr>
-      <tr>
-        <td>Vancouver</td>
-        <td>6282b9c9caa5267d89c82132</td>
-      </tr>
-    </table> 
 
     <h3>Create Item</h3>
-    <form action="/v1/items" method="POST">
-      <p>
-        Description: <input name="description" value="" type="text" required="required"/>
-        Weight (kg): <input name="weight" value="" type="text" required="required"/>
-        Length (cm): <input name="length" value="" type="text" required="required"/>
-        Width (cm): <input name="width" value="" type="text" required="required"/>
-        Height (cm): <input name="height" value="" type="text" required="required"/>
-        Warehouse ID: <input name="warehouseId" value="" type="text" required="required"/>
-
-      </p>
-      <input value="Submit" type="submit"/>
+    <form action="/v1/items" method="POST" enctype="multipart/form-data">
+      <input id="inputfield" type="file" name="upfile">
+      Name: <input name="name" value="" type="text" required="required" />
+      Description: <input name="description" value="" type="text" />
+      Quantity: <input name="quantity" value="" type="text" required="required" />
+      Price: <input name="price" value="" type="text" required="required" />
+      City:
+      <select name="city" required>
+        <option>Edmonton</option>
+        <option>Toronto</option>
+        <option>Vancouver</option>
+        <option>Montreal</option>
+        <option>Ottawa</option>
+      </select>
+      <input value="Submit" type="submit" />
     </form>
 
 
+    <div id="item-list" class="row row-cols-auto g-4">
+      
+    </div>
+  </div>
+</body>
 
-    <h3>Edit Item</h3>
-    <form id="editForm" action="" method="POST">
-      <p>
-        Item ID: <input id="editItemId" value="" type="text" required/>
-        Description: <input name="description" value="" type="text" placeholder="unchanged"/>
-        Weight (kg): <input name="weight" value="" type="text" placeholder="unchanged" />
-        Length (cm): <input name="length" value="" type="text" placeholder="unchanged"/>
-        Width (cm): <input name="width" value="" type="text" placeholder="unchanged"/>
-        Height (cm): <input name="height" value="" type="text" placeholder="unchanged"/>
-        Warehouse ID: <input name="warehouseId" value="" type="text" placeholder="unchanged"/>
-
-      </p>
-      <input value="Submit" type="submit"/>
-    </form>
-
-    <h3>Delete Item</h3>
-    <form id="deleteForm" action="">
-      <p>
-        Item ID: <input id="deleteItemId" value="" type="text" required/>
-      </p>
-    <input value="Submit" type="submit"/>
-    </form>
-
-
-
-    <h3>Create Warehouse</h3>
-    <form action="/v1/warehouses" method="POST">
-      <p>
-        Name: <input name="name" value="" type="text" required="required"/>
-        Latitude: <input name="latitude" value="" type="text" required="required"/>
-        Longitude: <input name="longitude" value="" type="text" required="required"/>
-      </p>
-      <input value="Submit" type="submit"/>
-    </form>
-
-  </body>
-</html> 
+</html>
